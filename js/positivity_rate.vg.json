@@ -1,0 +1,176 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 500,
+    "title": "Total Specimen vs Positive Specimen",
+    "data": {
+        "url": "https://raw.githubusercontent.com/spra0039/Homework-10/main/data/Positivity_rate_dataset_(with_population).csv"
+    },
+    "params": [
+        {
+            "name": "Population_Above",
+            "value": 0,
+            "bind": {
+                "input": "range",
+                "min": 0,
+                "max": 100000000,
+                "step": 1000000,
+                "name": "Minimum Population: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": "datum.Confirmed > 0"
+        },
+        {
+            "filter": "datum.Specimen > 0"
+        },
+        {
+            "filter": "datum.Population > Population_Above"
+        },
+        {
+            "calculate": "datum.Confirmed/datum.Specimen",
+            "as": "Positivity_rate"
+        },
+        {
+            "filter":"datum.Positivity_rate <= 1"
+        }
+    ],
+    "encoding": {
+        "x": {
+            "field": "Specimen",
+            "type": "quantitative",
+            "title": "Total Specimen",
+            "axis": {
+                "tickCount": 7
+            },
+            "scale": {
+                "type": "log",
+                "domain": [
+                    1,
+                    10000000
+                ]
+            }
+        },
+        "y": {
+            "field": "Confirmed",
+            "type": "quantitative",
+            "title": "Positive Specimen",
+            "axis": {
+                "tickCount": 5
+            },
+            "scale": {
+                "type": "log",
+                "domain": [
+                    1,
+                    1000000
+                ]
+            }
+        }
+    },
+    "layer": [
+        {
+            "mark": "circle",
+            "encoding": {
+                "size": {
+                    "field": "Population",
+                    "type": "quantitative",
+                    "scale": {
+                        "type": "threshold",
+                        "domain": [
+                            1000000,
+                            10000000,
+                            50000000,
+                            100000000,
+                            500000000,
+                            1000000000
+                        ],
+                        "range": [
+                            10,
+                            50,
+                            150,
+                            200,
+                            300,
+                            400,
+                            600
+                        ]
+                    },
+                    "legend": {
+                        "format": ".1s"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "Country",
+                        "type": "nominal"
+                    },
+                    {
+                        "field": "Specimen",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "Confirmed",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "Positivity_rate",
+                        "title": "Positivity Rate",
+                        "type": "quantitative",
+                        "format": ".2%"
+                    }
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "right",
+                "baseline": "middle",
+                "dx": -14,
+                "fontSize": 11.5,
+                "fontStyle": "italic"
+            },
+            "encoding": {
+                "text": {
+                    "field": "Country",
+                    "type": "nominal"
+                },
+                "color": {
+                    "value": "black"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "datum['Country'] == 'United States of America' || datum['Country'] == 'China' || datum['Country'] == 'Australia' || datum['Country'] == 'India' || datum['Country'] == 'Suriname' || datum['Country'] == 'Belgium' || datum['Country'] == 'French Guiana'",
+                        "value": 1
+                    },
+                    "value": 0
+                },
+                "tooltip": [
+                    {
+                        "field": "Country",
+                        "type": "nominal"
+                    },
+                    {
+                        "field": "Specimen",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "Confirmed",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "Positivity_rate",
+                        "title": "Positivity Rate",
+                        "type": "quantitative",
+                        "format": ".2%"
+                    }
+                ]
+            }
+        }
+    ]
+}

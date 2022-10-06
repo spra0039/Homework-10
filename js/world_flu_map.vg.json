@@ -1,10 +1,10 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "Influenza Cases in the World (3 Jan 2022 - 11 Sep 2022)",
-    "width": 800,
+    "width": "container",
     "height": 400,
     "data": {
-        "url": "https://raw.githubusercontent.com/spra0039/Homework-9/main/js/ne_110m_admin_0_countries.topojson",
+        "url": "https://raw.githubusercontent.com/spra0039/Homework-10/main/js/ne_110m_admin_0_countries.topojson",
         "format": {
             "type": "topojson",
             "feature": "ne_110m_admin_0_countries"
@@ -34,7 +34,7 @@
         },
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/spra0039/Homework-9/main/js/oceans.topojson",
+                "url": "https://raw.githubusercontent.com/spra0039/Homework-10/main/js/oceans.topojson",
                 "format": {
                     "type": "topojson",
                     "feature": "oceans"
@@ -47,7 +47,7 @@
         },
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/spra0039/Homework-9/main/js/ne_110m_graticules_30.topojson",
+                "url": "https://raw.githubusercontent.com/spra0039/Homework-10/main/js/ne_110m_graticules_30.topojson",
                 "format": {
                     "type": "topojson",
                     "feature": "ne_110m_graticules_30"
@@ -65,7 +65,7 @@
                     "lookup": "properties.NAME",
                     "from": {
                         "data": {
-                            "url": "https://raw.githubusercontent.com/spra0039/Homework-9/main/data/World_graph_dataset_(with_population).csv"
+                            "url": "https://raw.githubusercontent.com/spra0039/Homework-10/main/data/World_graph_dataset_(with_population).csv"
                         },
                         "key": "Country",
                         "fields": [
