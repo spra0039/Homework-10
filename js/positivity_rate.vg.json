@@ -157,11 +157,13 @@
                     },
                     {
                         "field": "Specimen",
+                        "title": "Total Specimen",
                         "type": "quantitative",
                         "format": ","
                     },
                     {
                         "field": "Confirmed",
+                        "title": "Positive Specimen (Confirmed)",
                         "type": "quantitative",
                         "format": ","
                     },
